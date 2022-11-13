@@ -15,10 +15,20 @@ class BowlingGame
     while @frame_number < 11 do
       frame = Frame.new
       io.puts "Frame #{@frame_number}"
-      frame.play_frame(io)
+      frame.roll_1(io)
+    
+      #if @bonus_rolls > 0
+      #  @bonus_score +=
+    
+      frame.roll_2(io) if frame.pins != 0
       
-      @frames << frame
 
+
+      if frame.bonus_type == 'strike'
+        @bonus_rolls += 2
+      end
+
+      @frames << frame
       @frame_number += 1
     end
   end

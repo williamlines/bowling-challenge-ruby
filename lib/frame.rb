@@ -46,8 +46,8 @@ class Frame
     end
   end
   
-  def play_frame(io = Kernel)
-    roll_1(io)
-    roll_2(io)
-  end
+  # def play_frame(io = Kernel)
+  #   roll_1(io)
+  #   roll_2(io) if @pins != 0
+  # end
 end

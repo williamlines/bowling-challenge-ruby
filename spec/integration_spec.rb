@@ -102,5 +102,94 @@ RSpec.describe BowlingGame do
       expect(game.frames[8].score1).to eq 4
       
     end
+
+    it 'can score for a strike bonus' do
+      
+      io = double(:io)
+
+      expect(io).to receive(:puts).with('Frame 1')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 2')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 3')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 4')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 5')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('10')
+
+      expect(io).to receive(:puts).with('Frame 6')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 7')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 8')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      expect(io).to receive(:puts).with('Frame 9')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('4')
+      expect(io).to receive(:puts).with('6 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('3')
+
+      expect(io).to receive(:puts).with('Frame 10')
+      expect(io).to receive(:puts).with('10 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).with('7 pins remaining')
+      expect(io).to receive(:puts).with('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+
+      game.play(io)
+
+      expect(game.frames[4].bonus).to be true
+      expect(game.frames[4].bonus_type).to eq 'strike'
+      #expect(game.frames[4].score1).to eq 18
+      
+    end
   end
 end
