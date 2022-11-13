@@ -45,4 +45,9 @@ class Frame
       @bonus_type = 'spare'
     end
   end
+  
+  def play_frame(io = Kernel)
+    roll_1(io)
+    roll_2(io)
+  end
 end

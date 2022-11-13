@@ -107,4 +107,69 @@ RSpec.describe Frame do
       expect(frame.bonus_type).to eq 'spare'
     end
   end
+
+  context 'play_frame method' do
+    it 'can play a frame with no strikes, spares, or errors' do
+      io = double(:io)
+      expect(io).to receive(:puts).and_return('10 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('3')
+      expect(io).to receive(:puts).and_return('7 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('5')
+      
+      frame.play_frame(io)
+      
+      expect(frame.score1).to eq 3
+      expect(frame.score2).to eq 5
+    end
+
+    it 'can play a frame with an error' do
+      io = double(:io)
+      expect(io).to receive(:puts).and_return('10 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('4')
+      expect(io).to receive(:puts).and_return('6 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('7')
+      
+      expect{frame.play_frame(io)}.to raise_error('error- score higher than remaining pins')
+      
+    end
+    it 'can play a frame with a strike' do
+      io = double(:io)
+      expect(io).to receive(:puts).and_return('10 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('0')
+      expect(io).to receive(:puts).and_return('10 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('10')
+      
+      frame.play_frame(io)
+      
+      expect(frame.score1).to eq 0
+      expect(frame.score2).to eq 10
+      expect(frame.bonus).to be true
+      expect(frame.bonus_type).to eq 'strike'
+
+    end
+
+    it 'can play a frame with a spare' do
+      io = double(:io)
+      expect(io).to receive(:puts).and_return('10 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for first roll')
+      expect(io).to receive(:gets).and_return('4')
+      expect(io).to receive(:puts).and_return('6 pins remaining')
+      expect(io).to receive(:puts).and_return('Enter score for second roll')
+      expect(io).to receive(:gets).and_return('6')
+      
+      frame.play_frame(io)
+      
+      expect(frame.score1).to eq 4
+      expect(frame.score2).to eq 6
+      expect(frame.bonus).to be true
+      expect(frame.bonus_type).to eq 'spare'
+
+    end
+  end
 end
