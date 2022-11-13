@@ -9,4 +9,15 @@ class Frame
     @bonus = false
     @bonus_type = ''
   end
+
+  def roll_1(io = Kernel)
+    
+    io.puts "Enter score for first roll"
+    @score1 = io.gets.chomp.to_i
+    
+    if @score1 == 10
+      @bonus = true
+      @bonus_type = 'strike'
+    end
+  end
 end
